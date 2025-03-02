@@ -1,0 +1,11 @@
+{
+  "date":"02-03-2025",
+  "forexValues":[{
+    "forexName":"INR",
+    "value":0.15
+  },
+    {
+      "forexName":"GBP",
+      "value":1.8
+    }]
+}

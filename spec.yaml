@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: Forex converter Service - OpenAPI 3.0
+  version: '1'
+paths:
+  /api/v1/create/currencyRates:
+    post:
+      tags:
+        - admin
+      summary: Add Forex rates for a day
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCurrency'
+        required: true
+      responses:
+        '201':
+          description: The new currency rates created Successfully
+        '400':
+          description: The currency rates failed to create. Please check the date format is in dd-mm-yyyy format and forex values
+  /api/v1/all-currencies:
+    get:
+     tags:
+      - user
+     summary: Get All Available Currencies
+     responses:
+       '200':
+        description: All available currency
+        content:
+         application/json:
+          schema:
+            type: array
+            items:
+             example: "INR"
+  /api/v1/forex-rates-across-all-days:
+    get:
+     tags:
+      - user
+     summary: Get All Available Forex Rates
+     responses:
+       '200':
+        description: All available currency
+        content:
+         application/json:
+          schema:
+            type: object
+            properties:
+             02-05-2024:
+              type: array
+              items:
+                $ref: "#/definitions/ForexModelPerDate"
+  /api/v1/forex-rates-for/{conversionDate}:
+    parameters:
+      - $ref: '#/parameters/ConversionDate'
+    get:
+     tags:
+      - user
+     summary: Get Forex Rates for a day
+          
+        
+     responses:
+       '200':
+        description: All availabale currency
+        content:
+         application/json:
+          schema:
+              type: array
+              items:
+                $ref: "#/definitions/ForexModelPerDate"
+       '400':
+        description: No data found for the given date please check the format of date is in dd-mm-yyyy
+  /api/v1/calculate-amount-in-EUR/for-amount/{amount}/forex/{forex}/date/{conversionDate}:
+    parameters:
+      - $ref: '#/parameters/ConversionDate'
+      - $ref: '#/parameters/Amount'
+      - $ref: '#/parameters/Forex'
+    get:
+     tags:
+      - user
+     summary: Get EUR amount for a given day for given forex
+          
+        
+     responses:
+       '200':
+        description: All availabale currency
+        content:
+         application/json:
+          schema:
+              type: object
+              properties:
+                totalAmountInEUR:
+                 type: number
+                 example: 150
+       '400':
+        description: No data found for the given date please check the format of date is in dd-mm-yyyy and forex is present and the amount is more than 0
+parameters:
+    ConversionDate:
+     in: path
+     name: conversionDate
+     required: true
+     schema:
+      type: string
+      example: "24-02-2021"
+    Amount:
+     in: path
+     name: amount
+     required: true
+     schema:
+      type: number
+      example: 100
+    Forex:
+     in: path
+     name: forex
+     required: true
+     schema:
+      type: string
+      example: "INR"      
+components:
+  schemas:
+    CreateCurrency:
+     type: object
+     properties:
+      date:
+       type: string
+       example: "24-02-2021"
+      forexValues:
+        type: array
+        items:
+         $ref: "#/definitions/ForexModel"
+definitions:
+  ForexModel:
+   type: object
+   properties:
+    forexName:
+     type: string
+     example: "INR"
+    value:
+      type: number
+      example: 20
+  ForexModelPerDate:
+   type: object
+   properties:
+    conversionDate:
+     type: string
+     example: "02-05-2024"
+    forexName:
+     type: string
+     example: "INR"
+    value:
+      type: number
+      example: 20   
+   

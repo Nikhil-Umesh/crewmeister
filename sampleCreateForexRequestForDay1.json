@@ -1,0 +1,11 @@
+{
+  "date":"01-03-2025",
+  "forexValues":[{
+    "forexName":"AUD",
+    "value":0.75
+  },
+    {
+      "forexName":"USD",
+      "value":1.75
+    }]
+}
