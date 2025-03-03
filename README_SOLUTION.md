@@ -23,17 +23,17 @@ All the end point details can be found in the spec.yaml document attached in the
 
 The forex amount and conversion amount should be greater than 0.
 
-The date should be in dd-MM-yyyy format and all the validations on the date has been added.
+The date should be in dd-MM-yyyy format and all the validations on the date have been added.
 
 For a given day a currency for example INR can be added only once.
 
-Models, Services and utils has been created as per the implementation needs.
+Models, Services, and utils have been created as per the implementation needs.
 
 Exceptions by DB have been handled at the applicable places in the code.
 
 The DB calls have been added in one method and reused wherever needed.
 
-An interface has been created for all the methods and autowired in controller for extensibility
+An interface has been created for all the methods and autowired in the controller for extensibility
 
 The already provided controller `api/v1/currencies` and the methods used by it are left untouched.
 
@@ -56,8 +56,8 @@ All the cases have been tested but to keep the document short attaching only the
 ![img_4.png](img_4.png)
 
 ## Future Enhancements
-- Extend the APIs to accept other date format
+- Extend the APIs to accept other date formats.
 - Add authentication to the APIs
-- Clean up the unused code provided at the time of setup
-- Optimize the database query and fetch from the DB once and keep it in application memory in instance variable. Populate the instance variable the first time and for subsequent queries access from there. In case of new Forex addition clear the variable and follow same process in the next query.
-- Combine the APIs of user Story 2 and user Story 3 by taking the conversion date as query param and return the response based on date if query parameter is present else written all the available data.
+- Clean up the unused code provided at the time of setup.
+- Optimize the database query and fetch from the DB once and keep it in application memory in the instance variable. Populate the instance variable the first time and for subsequent queries access from there. In case of a new Forex addition clear the variable and follow the same process in the next query.
+- Combine the APIs of user Story 2 and user Story 3 by taking the conversion date as the query param and returning the response based on the date, else return all the available data.
